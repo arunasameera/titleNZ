@@ -1,0 +1,33 @@
+---
+spring:
+  h2:
+    console:
+      enabled: true
+ebean:
+  db:
+    ddl:
+      generate: true
+      run: true
+datasource:
+  db:
+    databaseDriver: org.h2.Driver
+    databaseUrl: jdbc:h2:mem:landonlite
+    username: sa
+    password: ""
+logging:
+  level:
+    io.ebean.SQL: DEBUG
+    io.ebean.TXN: DEBUG
+server:
+  port: 8081
+
+
+  sql:
+    init:
+      mode=always:
+  jpa:
+    hibernate.ddl-auto: validate
+    hibernate:
+      show_sql=true:
+
+

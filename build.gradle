@@ -1,0 +1,81 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.3.61'
+        springBootVersion = '2.2.2.RELEASE'
+        ebeanVersion = '12.1.8'
+    }
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath("se.patrikerdes:gradle-use-latest-versions-plugin:0.2.13")
+        classpath('com.github.ben-manes:gradle-versions-plugin:0.27.0')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
+        classpath("io.ebean:ebean-gradle-plugin:${ebeanVersion}")
+    }
+}
+
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'se.patrikerdes.use-latest-versions'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.ebean'
+apply plugin: 'org.jetbrains.kotlin.jvm'
+
+group = 'nz.govt.linz'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('javax.xml.bind:jaxb-api:2.4.0-b180830.0359')
+    compile('javax.activation:activation:1.1.1')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.4.0-b180830.0438')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    implementation "io.ebean:ebean:${ebeanVersion}"
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "io.ebean.test:ebean-test-config:11.41.2"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.9.0'
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+ebean {
+    debugLevel = 1
+}
+
+springBoot {
+    mainClassName = 'nz.govt.linz.landonlite.LandOnLiteApplicationKt'
+}

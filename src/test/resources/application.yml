@@ -1,0 +1,26 @@
+---
+ebean:
+  db:
+    ddl:
+      generate: true
+      run: true
+datasource:
+  db:
+    databaseDriver: org.h2.Driver
+    databaseUrl: jdbc:h2:mem:landonlite
+    username: sa
+    password: ""
+logging:
+  level:
+    io.ebean.SQL: DEBUG
+    io.ebean.TXN: DEBUG
+spring:
+  jpa:
+    defer-datasource-initialization=true:
+
+
+
+
+
+
+
